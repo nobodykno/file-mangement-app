@@ -5,13 +5,19 @@
     align-items: center;
     height: 100vh;
     padding: 3rem;
-    background: red;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
     width: auto;
 }
 
 .login_form{
-    height: 71%;
+    position: absolute;
+    top: 22%;
+    height: 49%;
     width: 44%;
-    background: #dbaeae;
+    background: rgba(255, 255, 255, 0.9);
 }
 
+.submitbutton{
+    display: flex;
+    justify-content: center;
+}

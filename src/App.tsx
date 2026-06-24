@@ -3,6 +3,7 @@ import  Header from './components/layout/header/header'
 import Login from './components/login/login'
 import './App.css'
 import React from 'react'
+import Footer from './components/layout/footer/footer'
 function App() {
 
   return (
@@ -10,6 +11,9 @@ function App() {
     <Header /> 
 
     <Login />
+
+    <Footer />
+
        </>
   )
 }

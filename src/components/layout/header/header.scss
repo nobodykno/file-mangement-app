@@ -1,27 +1,29 @@
-
-
-.navbar_band{ 
+.navbar_band { 
     height: 24px;
     width: 100%;
-    animation: rainbowtransition 5s linear infinite;
-   }
-   
-   /* Animations */
+    animation: rainbowtransition 10s ease-in-out infinite;
+}
 
-   @keyframes rainbowtransition {
-       0% {
-           background-color: rgb(29, 147, 165) 
-       }
-       25% {
-           background-color: rgb(122, 182, 192) 
-       }
-       50% {
-           background-color: rgb(105, 180, 191)
-       }
-       75% {
-           background-color: rgb(86, 179, 193) 
-       }
-       100% {
-           background-color: rgb(63, 168, 185) 
-       }
-   }
+@keyframes rainbowtransition {
+    0% {
+        background-color: #ffb3b3; // Pastel Red
+    }
+    16% {
+        background-color: #ffd9b3; // Pastel Orange
+    }
+    33% {
+        background-color: #ffffb3; // Pastel Yellow
+    }
+    50% {
+        background-color: #b3ffb3; // Pastel Green
+    }
+    66% {
+        background-color: #b3b3ff; // Pastel Blue
+    }
+    83% {
+        background-color: #e6b3ff; // Pastel Purple
+    }
+    100% {
+        background-color: #ffb3b3; // Back to Pastel Red
+    }
+}
