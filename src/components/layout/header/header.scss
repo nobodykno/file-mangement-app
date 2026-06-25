@@ -1,7 +1,19 @@
 .navbar_band { 
-    height: 24px;
+    height: 51px;
     width: 100%;
     animation: rainbowtransition 10s ease-in-out infinite;
+}
+
+.btn-logout{
+
+    position: absolute;
+    right: 21px;
+    padding-top: 6px !important;
+
+}
+
+.button-container{
+     padding-top: 6px;
 }
 
 @keyframes rainbowtransition {

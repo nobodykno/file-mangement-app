@@ -2,15 +2,20 @@
 import React, { useState } from "react";
 import './login.scss'
 import { LoginModel } from "./login.model";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+
+    const navigate = useNavigate();
 
     const [loginForm, setLoginForm] = useState<LoginModel>({
         email: '',
         password: ''
     })
 
-    /** To accept submit login information 
+    
+
+    /** To accept submit login information and set token 
      * @param void 
     */
 
@@ -22,10 +27,24 @@ const Login = () => {
         if (!validateForm()) {
             return;
         }
+        else{
+            SetToken();
+        }
 
         // Set loading state
         setIsLoading(true);
     }
+
+
+    
+
+    function SetToken(){
+        localStorage.setItem('token','12345');
+        navigate('/dashboard')
+    }
+
+
+
 
     /** To accept the change in input field and setDate to login form
      * @param  inputevent  
