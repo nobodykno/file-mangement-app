@@ -8,6 +8,7 @@ import { Route, Routes } from 'react-router-dom'
 import Dashboard from './components/Dashboard/dashboard'
 import AuthGuard from './guard/auth.guard'
 import Sidebar from './components/layout/sidebar/sidebar'
+import Projects from './components/Project/projects'
 function App() {
 
   return (
@@ -24,7 +25,7 @@ function App() {
 
 
 <Route element={<AuthGuard />}>
-    <Route path="/dashboard" element={<Dashboard />} />
+    <Route path="/dashboard" element={<Projects />} />
   </Route>
 </Routes>
     <Footer />

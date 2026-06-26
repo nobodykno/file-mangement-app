@@ -1,0 +1,46 @@
+.confirm_modal {
+    .confirm_message {
+      font-size: 15px;
+      color: #555;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+  
+    .confirm_actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+  
+      button {
+        padding: 10px 24px;
+        border-radius: 8px;
+        font-size: 14px;
+        cursor: pointer;
+        border: none;
+        transition: all 0.2s;
+  
+        &:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
+      }
+  
+      .btn_cancel {
+        background: #f0f0f0;
+        color: #333;
+  
+        &:hover {
+          background: #e0e0e0;
+        }
+      }
+  
+      .btn_confirm {
+        background: #ff4d4d;
+        color: white;
+  
+        &:hover {
+          background: #e60000;
+        }
+      }
+    }
+  }
