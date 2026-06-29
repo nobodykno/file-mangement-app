@@ -1,0 +1,193 @@
+.project_detail {
+    padding: 24px;
+  
+    .btn_back {
+      background: none;
+      border: none;
+      color: #4CAF50;
+      font-size: 15px;
+      cursor: pointer;
+      margin-bottom: 24px;
+      padding: 0;
+      transition: color 0.2s;
+  
+      &:hover { color: #45a049; }
+    }
+  
+    .project_info_card {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      border: 1px solid #eee;
+  
+      .info_header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+  
+        h1 {
+          font-size: 24px;
+          color: #1a1a2e;
+          margin: 0;
+          font-weight: 500;
+        }
+  
+        .info_date {
+          font-size: 13px;
+          color: #aaa;
+        }
+      }
+  
+      .info_description {
+        font-size: 15px;
+        color: #666;
+        margin-bottom: 20px;
+        line-height: 1.6;
+      }
+  
+      .info_stats {
+        display: flex;
+        gap: 24px;
+  
+        .stat {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          background: #f9f9f9;
+          padding: 12px 24px;
+          border-radius: 8px;
+  
+          .stat_value {
+            font-size: 24px;
+            font-weight: 500;
+            color: #1a1a2e;
+          }
+  
+          .stat_label {
+            font-size: 12px;
+            color: #aaa;
+          }
+        }
+      }
+    }
+  
+    // Tabs
+    .tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #eee;
+  
+      .tab {
+        padding: 10px 24px;
+        background: none;
+        border: none;
+        font-size: 15px;
+        color: #888;
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        margin-bottom: -2px;
+        transition: all 0.2s;
+  
+        &:hover { color: #1a1a2e; }
+  
+        &.active {
+          color: #4CAF50;
+          border-bottom-color: #4CAF50;
+          font-weight: 500;
+        }
+      }
+    }
+  
+    // Table
+    .data_table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  
+      th {
+        background: #f9f9f9;
+        padding: 14px 16px;
+        text-align: left;
+        font-size: 13px;
+        color: #888;
+        font-weight: 500;
+        border-bottom: 1px solid #eee;
+      }
+  
+      td {
+        padding: 14px 16px;
+        font-size: 14px;
+        color: #333;
+        border-bottom: 1px solid #f5f5f5;
+      }
+  
+      tr:last-child td { border-bottom: none; }
+      tr:hover td { background: #fafafa; }
+    }
+  
+    // Status badges
+    .status_badge {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: capitalize;
+    }
+  
+    .status_completed { background: #e8f5e9; color: #2e7d32; }
+    .status_running   { background: #e3f2fd; color: #1565c0; }
+    .status_failed    { background: #ffebee; color: #c62828; }
+    .status_pending   { background: #fff8e1; color: #f57f17; }
+  
+    .empty_msg {
+      text-align: center;
+      color: #aaa;
+      padding: 40px;
+      font-size: 15px;
+    }
+  }
+  
+  .loading_state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px;
+    color: #888;
+  
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid #eee;
+      border-top: 3px solid #4CAF50;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 16px;
+    }
+  }
+  
+  .error_state {
+    text-align: center;
+    padding: 60px;
+    color: #ff4d4d;
+  
+    button {
+      margin-top: 12px;
+      padding: 10px 24px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }

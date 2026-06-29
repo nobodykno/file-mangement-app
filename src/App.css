@@ -74,3 +74,30 @@ h1{
     padding: 0.5rem;
     color: #d04949;
 }
+
+
+
+  
+  /* Full page layout */
+  .app_layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  /* Body = sidebar + content side by side */
+  .app_body {
+    display: flex;
+    flex: 1;
+    margin-top: 60px;     /* height of header */
+    margin-bottom: 60px;  /* height of footer */
+  }
+  
+  /* Main content sits next to sidebar */
+  .app_content {
+    margin-left: 240px;   /* width of sidebar */
+    flex: 1;
+    padding: 24px;
+    background-color: #f0f2f5;
+    min-height: calc(100vh - 120px);
+  }
