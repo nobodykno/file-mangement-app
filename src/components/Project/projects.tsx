@@ -149,7 +149,7 @@ const Projects = () => {
       {/* Empty State */}
       {!isLoading && !error && projects.length === 0 && (
         <div className='empty_state'>
-          <p>📂 No projects yet!</p>
+          <p>No projects yet!</p>
           <button onClick={() => setIsCreateOpen(true)}>
             Create your first project
           </button>

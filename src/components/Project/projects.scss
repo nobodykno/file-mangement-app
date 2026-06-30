@@ -82,17 +82,19 @@
     }
   }
 
-  // Grid
   .projects_grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 20px;
   }
+  
+
 
   // Card
   .project_card {
     background: white;
     border-radius: 12px;
+    width: 280px; 
     padding: 20px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.08);
     transition: transform 0.2s, box-shadow 0.2s;

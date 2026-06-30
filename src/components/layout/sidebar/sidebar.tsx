@@ -49,18 +49,10 @@ const Sidebar = () => {
                             className='menu_item'
                             onClick={() => handleNavigation('/dashboard')}
                         >
-                            <span className='menu_text'>Menu 1</span>
+                            <span className='menu_text'>Projects</span>
                         </div>
                     </li>
 
-                    <li>
-                        <div
-                            className='menu_item'
-                            onClick={() => handleNavigation('/dashboard')}
-                        >
-                            <span className='menu_text'>Menu 2</span>
-                        </div>
-                    </li>
 
                 </ul>
 

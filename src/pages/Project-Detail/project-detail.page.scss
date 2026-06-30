@@ -191,3 +191,24 @@
   @keyframes spin {
     to { transform: rotate(360deg); }
   }
+
+  .btn_files {
+    padding: 10px 24px;
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .btn_files:hover {
+    background-color: #1557b0;
+  }
+
+
+  .header-btn {
+    display: flex;
+    justify-content: space-between;
+  } 
+  

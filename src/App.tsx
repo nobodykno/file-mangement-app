@@ -8,6 +8,8 @@ import Footer from './components/layout/footer/footer'
 import Dashboard from './components/Dashboard/dashboard'
 import Projects from './components/Project/projects'
 import './App.css'
+import ProjectDetail from './pages/Project-Detail/project-detail.page'
+import ProjectFiles from './components/Project-Files/project-files'
 
 // Layout for protected pages
 const ProtectedLayout = () => {
@@ -25,6 +27,8 @@ const ProtectedLayout = () => {
             <Route element={<AuthGuard />}>
               <Route path='/dashboard' element={<Projects />} />
               <Route path='/projects' element={<Projects />} />
+              <Route path='/projects/:projectId' element={<ProjectDetail />} />
+              <Route path="/projects/:projectId/files" element={<ProjectFiles />} />
             </Route>
           </Routes>
         </main>
