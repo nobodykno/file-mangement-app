@@ -1,26 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-import './projects.scss';
+import "./projects.scss";
 
-import Modal from '../layout/modal/modal';
-import { Project, CreateProjectModel } from './project.model';
-import { getProjects, createProject, deleteProject } from '../../services/projects.service';
-import ConfirmModal from '../layout/modal/Confirm-modal';
+import Modal from "../layout/modal/modal";
+import { Project, CreateProjectModel } from "./project.model";
+import {
+  getProjects,
+  createProject,
+  deleteProject,
+} from "../../services/projects.service";
+import ConfirmModal from "../layout/modal/Confirm-modal";
 
 const Projects = () => {
-
   const navigate = useNavigate();
 
   // States
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>('');
+  const [error, setError] = useState<string>("");
 
   // Create modal states
   const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
-  const [createForm, setCreateForm] = useState<CreateProjectModel>({ name: '', description: '' });
-  const [createErrors, setCreateErrors] = useState<CreateProjectModel>({ name: '', description: '' });
+  const [createForm, setCreateForm] = useState<CreateProjectModel>({
+    name: "",
+    description: "",
+  });
+  const [createErrors, setCreateErrors] = useState<CreateProjectModel>({
+    name: "",
+    description: "",
+  });
   const [isCreating, setIsCreating] = useState<boolean>(false);
 
   // Delete modal states
@@ -36,11 +45,11 @@ const Projects = () => {
   const fetchProjects = async () => {
     try {
       setIsLoading(true);
-      setError('');
+      setError("");
       const data = await getProjects();
       setProjects(data);
     } catch (err) {
-      setError('Failed to load projects. Please try again!');
+      setError("Failed to load projects. Please try again!");
     } finally {
       setIsLoading(false);
     }
@@ -49,21 +58,21 @@ const Projects = () => {
   // Handle create form change
   const handleCreateChange = (e: any) => {
     setCreateForm({ ...createForm, [e.target.name]: e.target.value });
-    setCreateErrors({ ...createErrors, [e.target.name]: '' });
+    setCreateErrors({ ...createErrors, [e.target.name]: "" });
   };
 
   // Validate create form
   const validateCreate = (): boolean => {
     let isValid = true;
-    const newErrors = { name: '', description: '' };
+    const newErrors = { name: "", description: "" };
 
     if (!createForm.name.trim()) {
-      newErrors.name = 'Project name is required';
+      newErrors.name = "Project name is required";
       isValid = false;
     }
 
     if (!createForm.description.trim()) {
-      newErrors.description = 'Description is required';
+      newErrors.description = "Description is required";
       isValid = false;
     }
 
@@ -73,16 +82,18 @@ const Projects = () => {
 
   // Handle create project
   const handleCreate = async () => {
-    if (!validateCreate()) {return;}
+    if (!validateCreate()) {
+      return;
+    }
 
     try {
       setIsCreating(true);
       const newProject = await createProject(createForm);
       setProjects([...projects, newProject]);
       setIsCreateOpen(false);
-      setCreateForm({ name: '', description: '' });
+      setCreateForm({ name: "", description: "" });
     } catch (err) {
-      setError('Failed to create project!');
+      setError("Failed to create project!");
     } finally {
       setIsCreating(false);
     }
@@ -96,16 +107,18 @@ const Projects = () => {
 
   // Handle delete project
   const handleDelete = async () => {
-    if (!selectedProject) {return;}
+    if (!selectedProject) {
+      return;
+    }
 
     try {
       setIsDeleting(true);
       await deleteProject(selectedProject.id);
-      setProjects(projects.filter(p => p.id !== selectedProject.id));
+      setProjects(projects.filter((p) => p.id !== selectedProject.id));
       setIsDeleteOpen(false);
       setSelectedProject(null);
     } catch (err) {
-      setError('Failed to delete project!');
+      setError("Failed to delete project!");
     } finally {
       setIsDeleting(false);
     }
@@ -117,30 +130,26 @@ const Projects = () => {
   };
 
   return (
-    <div className='projects_page'>
-
+    <div className="projects_page">
       {/* Page Header */}
-      <div className='page_header'>
+      <div className="page_header">
         <h1>Projects</h1>
-        <button
-          className='btn_create'
-          onClick={() => setIsCreateOpen(true)}
-        >
+        <button className="btn_create" onClick={() => setIsCreateOpen(true)}>
           + Create Project
         </button>
       </div>
 
       {/* Loading State */}
       {isLoading && (
-        <div className='loading_state'>
-          <div className='spinner'></div>
+        <div className="loading_state">
+          <div className="spinner"></div>
           <p>Loading projects...</p>
         </div>
       )}
 
       {/* Error State */}
       {error && !isLoading && (
-        <div className='error_state'>
+        <div className="error_state">
           <p>⚠️ {error}</p>
           <button onClick={fetchProjects}>Try Again</button>
         </div>
@@ -148,7 +157,7 @@ const Projects = () => {
 
       {/* Empty State */}
       {!isLoading && !error && projects.length === 0 && (
-        <div className='empty_state'>
+        <div className="empty_state">
           <p>No projects yet!</p>
           <button onClick={() => setIsCreateOpen(true)}>
             Create your first project
@@ -158,47 +167,45 @@ const Projects = () => {
 
       {/* Projects Grid */}
       {!isLoading && !error && projects.length > 0 && (
-        <div className='projects_grid'>
+        <div className="projects_grid">
           {projects.map((project) => (
-            <div key={project.id} className='project_card'>
-
+            <div key={project.id} className="project_card">
               {/* Card Header */}
-              <div className='card_header'>
+              <div className="card_header">
                 <h2>{project.name}</h2>
-                <span className='card_date'>{project.createdDate}</span>
+                <span className="card_date">{project.createdDate}</span>
               </div>
 
               {/* Description */}
-              <p className='card_description'>{project.description}</p>
+              <p className="card_description">{project.description}</p>
 
               {/* Stats */}
-              <div className='card_stats'>
-                <div className='stat'>
-                  <span className='stat_value'>{project.filesCount}</span>
-                  <span className='stat_label'>Files</span>
+              <div className="card_stats">
+                <div className="stat">
+                  <span className="stat_value">{project.filesCount}</span>
+                  <span className="stat_label">Files</span>
                 </div>
-                <div className='stat'>
-                  <span className='stat_value'>{project.jobsCount}</span>
-                  <span className='stat_label'>Jobs</span>
+                <div className="stat">
+                  <span className="stat_value">{project.jobsCount}</span>
+                  <span className="stat_label">Jobs</span>
                 </div>
               </div>
 
               {/* Actions */}
-              <div className='card_actions'>
+              <div className="card_actions">
                 <button
-                  className='btn_open'
+                  className="btn_open"
                   onClick={() => openProject(project.id)}
                 >
                   Open
                 </button>
                 <button
-                  className='btn_delete'
+                  className="btn_delete"
                   onClick={() => openDeleteModal(project)}
                 >
                   Delete
                 </button>
               </div>
-
             </div>
           ))}
         </div>
@@ -207,67 +214,68 @@ const Projects = () => {
       {/* Create Project Modal */}
       <Modal
         isOpen={isCreateOpen}
-        title='Create Project'
+        title="Create Project"
         onClose={() => setIsCreateOpen(false)}
       >
-        <div className='create_form'>
-
-          <div className='form_field'>
+        <div className="create_form">
+          <div className="form_field">
             <label>Project Name</label>
             <input
-              type='text'
-              name='name'
+              type="text"
+              name="name"
               value={createForm.name}
               onChange={handleCreateChange}
-              placeholder='Enter project name'
-              className={createErrors.name ? 'input_error' : ''}
+              placeholder="Enter project name"
+              className={createErrors.name ? "input_error" : ""}
             />
-            {createErrors.name && <p className='error_msg'>{createErrors.name}</p>}
+            {createErrors.name && (
+              <p className="error_msg">{createErrors.name}</p>
+            )}
           </div>
 
-          <div className='form_field'>
+          <div className="form_field">
             <label>Description</label>
             <textarea
-              name='description'
+              name="description"
               value={createForm.description}
               onChange={handleCreateChange}
-              placeholder='Enter project description'
+              placeholder="Enter project description"
               rows={4}
-              className={createErrors.description ? 'input_error' : ''}
+              className={createErrors.description ? "input_error" : ""}
             />
-            {createErrors.description && <p className='error_msg'>{createErrors.description}</p>}
+            {createErrors.description && (
+              <p className="error_msg">{createErrors.description}</p>
+            )}
           </div>
 
-          <div className='form_actions'>
+          <div className="form_actions">
             <button
-              className='btn_cancel'
+              className="btn_cancel"
               onClick={() => setIsCreateOpen(false)}
               disabled={isCreating}
             >
               Cancel
             </button>
             <button
-              className='btn_submit'
+              className="btn_submit"
               onClick={handleCreate}
               disabled={isCreating}
             >
-              {isCreating ? 'Creating...' : 'Create Project'}
+              {isCreating ? "Creating..." : "Create Project"}
             </button>
           </div>
-
         </div>
       </Modal>
 
       {/* Delete Confirmation Modal */}
       <ConfirmModal
         isOpen={isDeleteOpen}
-        title='Delete Project'
+        title="Delete Project"
         message={`Are you sure you want to delete "${selectedProject?.name}"? This action cannot be undone.`}
         onConfirm={handleDelete}
         onCancel={() => setIsDeleteOpen(false)}
         isLoading={isDeleting}
       />
-
     </div>
   );
 };
