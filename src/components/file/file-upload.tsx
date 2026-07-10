@@ -1,49 +1,49 @@
-import React, { useState } from 'react'
-import './file-upload.scss'
+import React, { useState } from 'react';
+import './file-upload.scss';
 
 const FileUpload = (props: any) => {
 
-  const [selectedFiles, setSelectedFiles] = useState<any>([])
-  const [progress, setProgress] = useState<number>(0)
-  const [isUploading, setIsUploading] = useState<boolean>(false)
+  const [selectedFiles, setSelectedFiles] = useState<any>([]);
+  const [progress, setProgress] = useState<number>(0);
+  const [isUploading, setIsUploading] = useState<boolean>(false);
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) return
-    const files = Array.from(e.target.files)
-    setSelectedFiles(files)
-  }
+    if (!e.target.files) {return;}
+    const files = Array.from(e.target.files);
+    setSelectedFiles(files);
+  };
 
   const handleDragOver = (e) => {
-    e.preventDefault()
-  }
+    e.preventDefault();
+  };
 
   /** Handle Drag and drop Files
    * @param void
    */
 
   const handleDrop = (e:any) => {
-    e.preventDefault()
-    const files = Array.from(e.dataTransfer.files)
-    setSelectedFiles(files)
-  }
+    e.preventDefault();
+    const files = Array.from(e.dataTransfer.files);
+    setSelectedFiles(files);
+  };
 
-    /** Handle Upload files
+  /** Handle Upload files
    * @param void
    */
 
   const handleUpload = () => {
-    setIsUploading(true)
-    setProgress(0)
+    setIsUploading(true);
+    setProgress(0);
 
-    let currentProgress = 0
+    let currentProgress = 0;
 
     const interval = setInterval(() => {
-      currentProgress = currentProgress + 10
-      setProgress(currentProgress)
+      currentProgress = currentProgress + 10;
+      setProgress(currentProgress);
 
       if (currentProgress >= 100) {
-        clearInterval(interval)
-        setIsUploading(false)
+        clearInterval(interval);
+        setIsUploading(false);
 
         selectedFiles.forEach((file) => {
           const newFile = {
@@ -51,15 +51,15 @@ const FileUpload = (props: any) => {
             name: file.name,
             size: file.size,
             uploadedDate: new Date().toLocaleDateString()
-          }
-          props.onUpload(newFile)
-        })
+          };
+          props.onUpload(newFile);
+        });
 
-        setSelectedFiles([])
-        setProgress(0)
+        setSelectedFiles([]);
+        setProgress(0);
       }
-    }, 300)
-  }
+    }, 300);
+  };
 
   return (
     <div>
@@ -94,7 +94,7 @@ const FileUpload = (props: any) => {
       )}
 
     </div>
-  )
-}
+  );
+};
 
-export default FileUpload
+export default FileUpload;

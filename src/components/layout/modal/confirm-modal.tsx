@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-import './confirm-modal.scss'
-import Modal from './modal'
+import './confirm-modal.scss';
+import Modal from './modal';
 
 interface ConfirmModalProps {
   isOpen: boolean
@@ -42,7 +42,7 @@ const ConfirmModal = ({
         </div>
       </div>
     </Modal>
-  )
-}
+  );
+};
 
-export default ConfirmModal
+export default ConfirmModal;

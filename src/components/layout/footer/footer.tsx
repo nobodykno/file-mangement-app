@@ -1,16 +1,16 @@
-import React from "react";
+import React from 'react';
 import './footer.scss';
 
 const Footer  = () =>{
 
-    return (
-        <div className="fs-footer">
-            <div className="footertext">
+  return (
+    <div className="fs-footer">
+      <div className="footertext">
                 Made in India
-            </div>
-        </div>
-    )
+      </div>
+    </div>
+  );
 
-}
+};
 
-export default Footer
+export default Footer;

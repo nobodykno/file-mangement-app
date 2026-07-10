@@ -1,120 +1,120 @@
-import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import './projects.scss'
+import './projects.scss';
 
-import Modal from '../layout/modal/modal'
-import { Project, CreateProjectModel } from './project.model'
-import { getProjects, createProject, deleteProject } from '../../services/projects.service'
-import ConfirmModal from '../layout/modal/Confirm-modal'
+import Modal from '../layout/modal/modal';
+import { Project, CreateProjectModel } from './project.model';
+import { getProjects, createProject, deleteProject } from '../../services/projects.service';
+import ConfirmModal from '../layout/modal/Confirm-modal';
 
 const Projects = () => {
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // States
-  const [projects, setProjects] = useState<Project[]>([])
-  const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [error, setError] = useState<string>('')
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>('');
 
   // Create modal states
-  const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false)
-  const [createForm, setCreateForm] = useState<CreateProjectModel>({ name: '', description: '' })
-  const [createErrors, setCreateErrors] = useState<CreateProjectModel>({ name: '', description: '' })
-  const [isCreating, setIsCreating] = useState<boolean>(false)
+  const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
+  const [createForm, setCreateForm] = useState<CreateProjectModel>({ name: '', description: '' });
+  const [createErrors, setCreateErrors] = useState<CreateProjectModel>({ name: '', description: '' });
+  const [isCreating, setIsCreating] = useState<boolean>(false);
 
   // Delete modal states
-  const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false)
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
-  const [isDeleting, setIsDeleting] = useState<boolean>(false)
+  const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
   // Fetch projects on load
   useEffect(() => {
-    fetchProjects()
-  }, [])
+    fetchProjects();
+  }, []);
 
   const fetchProjects = async () => {
     try {
-      setIsLoading(true)
-      setError('')
-      const data = await getProjects()
-      setProjects(data)
+      setIsLoading(true);
+      setError('');
+      const data = await getProjects();
+      setProjects(data);
     } catch (err) {
-      setError('Failed to load projects. Please try again!')
+      setError('Failed to load projects. Please try again!');
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   // Handle create form change
   const handleCreateChange = (e: any) => {
-    setCreateForm({ ...createForm, [e.target.name]: e.target.value })
-    setCreateErrors({ ...createErrors, [e.target.name]: '' })
-  }
+    setCreateForm({ ...createForm, [e.target.name]: e.target.value });
+    setCreateErrors({ ...createErrors, [e.target.name]: '' });
+  };
 
   // Validate create form
   const validateCreate = (): boolean => {
-    let isValid = true
-    const newErrors = { name: '', description: '' }
+    let isValid = true;
+    const newErrors = { name: '', description: '' };
 
     if (!createForm.name.trim()) {
-      newErrors.name = 'Project name is required'
-      isValid = false
+      newErrors.name = 'Project name is required';
+      isValid = false;
     }
 
     if (!createForm.description.trim()) {
-      newErrors.description = 'Description is required'
-      isValid = false
+      newErrors.description = 'Description is required';
+      isValid = false;
     }
 
-    setCreateErrors(newErrors)
-    return isValid
-  }
+    setCreateErrors(newErrors);
+    return isValid;
+  };
 
   // Handle create project
   const handleCreate = async () => {
-    if (!validateCreate()) return
+    if (!validateCreate()) {return;}
 
     try {
-      setIsCreating(true)
-      const newProject = await createProject(createForm)
-      setProjects([...projects, newProject])
-      setIsCreateOpen(false)
-      setCreateForm({ name: '', description: '' })
+      setIsCreating(true);
+      const newProject = await createProject(createForm);
+      setProjects([...projects, newProject]);
+      setIsCreateOpen(false);
+      setCreateForm({ name: '', description: '' });
     } catch (err) {
-      setError('Failed to create project!')
+      setError('Failed to create project!');
     } finally {
-      setIsCreating(false)
+      setIsCreating(false);
     }
-  }
+  };
 
   // Open delete modal
   const openDeleteModal = (project: Project) => {
-    setSelectedProject(project)
-    setIsDeleteOpen(true)
-  }
+    setSelectedProject(project);
+    setIsDeleteOpen(true);
+  };
 
   // Handle delete project
   const handleDelete = async () => {
-    if (!selectedProject) return
+    if (!selectedProject) {return;}
 
     try {
-      setIsDeleting(true)
-      await deleteProject(selectedProject.id)
-      setProjects(projects.filter(p => p.id !== selectedProject.id))
-      setIsDeleteOpen(false)
-      setSelectedProject(null)
+      setIsDeleting(true);
+      await deleteProject(selectedProject.id);
+      setProjects(projects.filter(p => p.id !== selectedProject.id));
+      setIsDeleteOpen(false);
+      setSelectedProject(null);
     } catch (err) {
-      setError('Failed to delete project!')
+      setError('Failed to delete project!');
     } finally {
-      setIsDeleting(false)
+      setIsDeleting(false);
     }
-  }
+  };
 
   // Open project details
   const openProject = (id: number) => {
-    navigate(`/projects/${id}`)
-  }
+    navigate(`/projects/${id}`);
+  };
 
   return (
     <div className='projects_page'>
@@ -269,7 +269,7 @@ const Projects = () => {
       />
 
     </div>
-  )
-}
+  );
+};
 
-export default Projects
+export default Projects;

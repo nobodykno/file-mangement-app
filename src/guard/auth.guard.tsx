@@ -1,5 +1,5 @@
-import React from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import React from 'react';
+import { Navigate, Outlet } from 'react-router-dom';
 
 /**
  * 
@@ -7,14 +7,14 @@ import { Navigate, Outlet } from "react-router-dom";
  */
 
 const authnitcate = () => {
-    let token = localStorage.getItem('token');
-    if (token == '12345') {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
+  const token = localStorage.getItem('token');
+  if (token === '12345') {
+    return true;
+  }
+  else {
+    return false;
+  }
+};
 
 /**
  * 
@@ -24,13 +24,13 @@ const authnitcate = () => {
 const AuthGueard = () => {
 
 
-    if (authnitcate()) {
-        return <Outlet />
-    }
-    else {
-        return <Navigate to="/login" replace />
-    }
+  if (authnitcate()) {
+    return <Outlet />;
+  }
+  else {
+    return <Navigate to="/login" replace />;
+  }
 
-}
+};
 
-export default AuthGueard
+export default AuthGueard;

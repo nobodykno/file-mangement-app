@@ -1,70 +1,70 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import './sidebar.scss'
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './sidebar.scss';
 
 const Sidebar = () => {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
 
-    const [authenticated, SetAuthenticated] = useState<boolean>(false)
+  const [authenticated, SetAuthenticated] = useState<boolean>(false);
 
 
-      /**
+  /**
        * Handles the logout
        * @param void
        */
-    const handleLogout = () => {
-        localStorage.removeItem('token')
-        navigate('/login')
-    }
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+  };
 
-        /**
+  /**
        * Handles the routing
        * @param routepath
        */
 
-    const handleNavigation = (path) => {
-        navigate(path)
-    }
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
 
-      /**
+  /**
        * Handles the routing
        * load to check logged in or not
        */
 
-    useEffect(() => {
+  useEffect(() => {
 
-        const token = localStorage.getItem('token')
-        SetAuthenticated(!!token)
-    }, [])
+    const token = localStorage.getItem('token');
+    SetAuthenticated(!!token);
+  }, []);
 
-    return (
+  return (
 
-        <>
-            {authenticated && (<aside className='sidebar'>
-                <div className='sidebar_logo'>File</div>
+    <>
+      {authenticated && (<aside className='sidebar'>
+        <div className='sidebar_logo'>File</div>
 
-                <ul className='sidebar_menu'>
-                    <li>
-                        <div
-                            className='menu_item'
-                            onClick={() => handleNavigation('/dashboard')}
-                        >
-                            <span className='menu_text'>Projects</span>
-                        </div>
-                    </li>
+        <ul className='sidebar_menu'>
+          <li>
+            <div
+              className='menu_item'
+              onClick={() => handleNavigation('/projects')}
+            >
+              <span className='menu_text'>Projects</span>
+            </div>
+          </li>
 
 
-                </ul>
+        </ul>
 
-                <div className='sidebar_logout' onClick={handleLogout}>
-                    <span className='menu_icon'>🚪</span>
-                    <span className='menu_text'>Logout</span>
-                </div>
-            </aside>
-            )}
-        </>
+        <div className='sidebar_logout' onClick={handleLogout}>
+          <span className='menu_icon'>🚪</span>
+          <span className='menu_text'>Logout</span>
+        </div>
+      </aside>
+      )}
+    </>
 
-    )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;

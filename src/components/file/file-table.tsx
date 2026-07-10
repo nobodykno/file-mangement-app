@@ -1,17 +1,17 @@
-import React from 'react'
-import './file-table.scss'
+import React from 'react';
+import './file-table.scss';
 
 const FileTable = (props: any) => {
 
   const formatSize = (bytes: number) => {
     if (bytes < 1024) {
-      return bytes + ' B'
+      return bytes + ' B';
     } else if (bytes < 1024 * 1024) {
-      return (bytes / 1024).toFixed(1) + ' KB'
+      return (bytes / 1024).toFixed(1) + ' KB';
     } else {
-      return (bytes / 1024 / 1024).toFixed(1) + ' MB'
+      return (bytes / 1024 / 1024).toFixed(1) + ' MB';
     }
-  }
+  };
 
   return (
     <div>
@@ -54,7 +54,7 @@ const FileTable = (props: any) => {
         </table>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default FileTable
+export default FileTable;

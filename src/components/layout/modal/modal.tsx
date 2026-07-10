@@ -1,5 +1,5 @@
-import React from 'react'
-import './modal.scss'
+import React from 'react';
+import './modal.scss';
 
 interface ModalProps {
   isOpen: boolean
@@ -10,7 +10,7 @@ interface ModalProps {
 
 const Modal = ({ isOpen, title, onClose, children }: ModalProps) => {
 
-  if (!isOpen) return null   
+  if (!isOpen) {return null;}   
 
   return (
     <div className='modal_overlay' onClick={onClose}>
@@ -31,7 +31,7 @@ const Modal = ({ isOpen, title, onClose, children }: ModalProps) => {
 
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Modal
+export default Modal;

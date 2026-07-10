@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
 const Dashboard = () =>{
 
-    return (
-        <div className="welcometext">Welcome</div>
-    )
-}
+  return (
+    <div className="welcometext">Welcome</div>
+  );
+};
 
-export default Dashboard
+export default Dashboard;

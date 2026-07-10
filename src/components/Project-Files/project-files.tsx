@@ -1,41 +1,41 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
 
-import './project-files.scss'
-import FileUpload from '../file/file-upload'
-import FileTable from '../file/file-table'
-import JobList from '../jobs/jobs-list'
+import './project-files.scss';
+import FileUpload from '../file/file-upload';
+import FileTable from '../file/file-table';
+import JobList from '../jobs/jobs-list';
 
 const ProjectFiles = () => {
 
-  const [files, setFiles] = useState<any[]>([])
-  const [jobs, setJobs] = useState<any[]>([])
-  const [selectedFiles, setSelectedFiles] = useState<number[]>([])
+  const [files, setFiles] = useState<any[]>([]);
+  const [jobs, setJobs] = useState<any[]>([]);
+  const [selectedFiles, setSelectedFiles] = useState<number[]>([]);
 
   // Add uploaded file to list
   const handleUpload = (newFile: any) => {
-    setFiles([...files, newFile])
-  }
+    setFiles([...files, newFile]);
+  };
 
   // Delete a file
   const handleDelete = (fileId: number) => {
-    setFiles(files.filter((f) => f.id !== fileId))
-    setSelectedFiles(selectedFiles.filter((id) => id !== fileId))
-  }
-   /** Handle Selected job
+    setFiles(files.filter((f) => f.id !== fileId));
+    setSelectedFiles(selectedFiles.filter((id) => id !== fileId));
+  };
+  /** Handle Selected job
    * @param fileId
    */
   
   
   const handleSelect = (fileId: number) => {
     if (selectedFiles.includes(fileId)) {
-      setSelectedFiles(selectedFiles.filter((id) => id !== fileId))
+      setSelectedFiles(selectedFiles.filter((id) => id !== fileId));
     } else {
-      setSelectedFiles([...selectedFiles, fileId])
+      setSelectedFiles([...selectedFiles, fileId]);
     }
-  }
+  };
 
-   /** Handle create Job
+  /** Handle create Job
    * @param jobId
    * @param newStatus
    * @param newProgress
@@ -49,17 +49,17 @@ const ProjectFiles = () => {
       createdAt: new Date().toLocaleString(),
       completedAt: '',
       fileIds: selectedFiles
-    }
+    };
 
     // Render immediately
-    setJobs([...jobs, newJob])
+    setJobs([...jobs, newJob]);
 
     // Clear selection
-    setSelectedFiles([])
-  }
+    setSelectedFiles([]);
+  };
 
 
-    /** Update job status (called by JobList polling)
+  /** Update job status (called by JobList polling)
    * @param jobId
    * @param newStatus
    * @param newProgress
@@ -73,12 +73,12 @@ const ProjectFiles = () => {
             status: newStatus,
             progress: newProgress,
             completedAt: newStatus === 'COMPLETED' ? new Date().toLocaleString() : job.completedAt
-          }
+          };
         }
-        return job
+        return job;
       })
-    )
-  }
+    );
+  };
 
   return (
     <div className="project_files_page">
@@ -109,7 +109,7 @@ const ProjectFiles = () => {
       <JobList jobs={jobs} onUpdateJob={handleUpdateJob} />
 
     </div>
-  )
-}
+  );
+};
 
-export default ProjectFiles
+export default ProjectFiles;

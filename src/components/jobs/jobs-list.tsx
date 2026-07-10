@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import './jobs-list.scss'
+import React, { useEffect } from 'react';
+import './jobs-list.scss';
 
 const JobList = (props: any) => {
 
@@ -12,59 +12,59 @@ const JobList = (props: any) => {
 
         // Stop checking if already finished
         if (job.status === 'COMPLETED' || job.status === 'FAILED') {
-          return
+          return;
         }
 
         // Simple fake progress increase
-        let newProgress = job.progress + 20
+        let newProgress = job.progress + 20;
 
         if (newProgress >= 100) {
-          newProgress = 100
-          props.onUpdateJob(job.id, 'COMPLETED', newProgress)
+          newProgress = 100;
+          props.onUpdateJob(job.id, 'COMPLETED', newProgress);
         } else {
-          props.onUpdateJob(job.id, 'RUNNING', newProgress)
+          props.onUpdateJob(job.id, 'RUNNING', newProgress);
         }
 
-      })
+      });
 
-    }, 2000)
+    }, 2000);
 
     // Cleanup — runs when component unmounts
     return () => {
-      clearInterval(interval)
-    }
+      clearInterval(interval);
+    };
 
-  }, [props.jobs])
+  }, [props.jobs]);
 
   
 
-    /** Download job output
+  /** Download job output
    * @param JobId
    */
   const handleDownload = (jobId: number) => {
 
-    const fileContent = 'This is fake zip content for job ' + jobId
-    const blob = new Blob([fileContent], { type: 'text/plain' })
-    const url = window.URL.createObjectURL(blob)
+    const fileContent = 'This is fake zip content for job ' + jobId;
+    const blob = new Blob([fileContent], { type: 'text/plain' });
+    const url = window.URL.createObjectURL(blob);
 
-    const link = document.createElement('a')
-    link.href = url
-    link.download = 'job-' + jobId + '-output.zip'
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-  }
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'job-' + jobId + '-output.zip';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
 
   /** Get CSS class based on status
    * @param status
    */
   const getStatusClass = (status: string) => {
-    if (status === 'COMPLETED') return 'status_text status_completed'
-    if (status === 'RUNNING') return 'status_text status_running'
-    if (status === 'FAILED') return 'status_text status_failed'
-    return 'status_text status_pending'
-  }
+    if (status === 'COMPLETED') {return 'status_text status_completed';}
+    if (status === 'RUNNING') {return 'status_text status_running';}
+    if (status === 'FAILED') {return 'status_text status_failed';}
+    return 'status_text status_pending';
+  };
 
   return (
     <div>
@@ -118,7 +118,7 @@ const JobList = (props: any) => {
         </table>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default JobList
+export default JobList;
