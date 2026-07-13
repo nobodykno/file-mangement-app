@@ -1,15 +1,21 @@
-import React from 'react';
-import './file-table.scss';
+import React from "react";
+import "./file-table.scss";
+import { formatDate } from "../../handler/date-handler";
 
+
+/**
+ * 
+ * @param fileDetails
+ * @returns 
+ */
 const FileTable = (props: any) => {
-
   const formatSize = (bytes: number) => {
     if (bytes < 1024) {
-      return bytes + ' B';
+      return bytes + " B";
     } else if (bytes < 1024 * 1024) {
-      return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / 1024).toFixed(1) + " KB";
     } else {
-      return (bytes / 1024 / 1024).toFixed(1) + ' MB';
+      return (bytes / 1024 / 1024).toFixed(1) + " MB";
     }
   };
 
@@ -20,7 +26,7 @@ const FileTable = (props: any) => {
       {props.files.length === 0 && <p>No files yet!</p>}
 
       {props.files.length > 0 && (
-        <table className="file_table">
+        <table className="table">
           <thead>
             <tr>
               <th>Select</th>
@@ -42,9 +48,12 @@ const FileTable = (props: any) => {
                 </td>
                 <td>{file.name}</td>
                 <td>{formatSize(file.size)}</td>
-                <td>{file.uploadedDate}</td>
+                <td>{formatDate(file.uploaded_at)}</td>
                 <td>
-                  <button className="delete_btn" onClick={() => props.onDelete(file.id)}>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => props.onDelete(file.id)}
+                  >
                     Delete
                   </button>
                 </td>

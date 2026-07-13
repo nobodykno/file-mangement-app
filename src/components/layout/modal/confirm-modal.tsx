@@ -26,14 +26,14 @@ const ConfirmModal = ({
         <p className='confirm_message'>{message}</p>
         <div className='confirm_actions'>
           <button
-            className='btn_cancel'
+            className='btn'
             onClick={onCancel}
             disabled={isLoading}
           >
             Cancel
           </button>
           <button
-            className='btn_confirm'
+            className='btn btn-primary'
             onClick={onConfirm}
             disabled={isLoading}
           >

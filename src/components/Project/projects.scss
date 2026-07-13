@@ -13,19 +13,6 @@
       margin: 0;
       font-weight: 500;
     }
-
-    .btn_create {
-      padding: 10px 24px;
-      background: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 15px;
-      cursor: pointer;
-      transition: background 0.3s;
-
-      &:hover { background: #45a049; }
-    }
   }
 
   // Loading
@@ -53,15 +40,6 @@
     padding: 60px;
     color: #ff4d4d;
 
-    button {
-      margin-top: 12px;
-      padding: 10px 24px;
-      background: #ff4d4d;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
   }
 
   // Empty
@@ -171,19 +149,6 @@
         cursor: pointer;
         transition: all 0.2s;
       }
-
-      .btn_open {
-        background: #1a1a2e;
-        color: white;
-        &:hover { background: #2a2a4e; }
-      }
-
-      .btn_delete {
-        background: #fff0f0;
-        color: #ff4d4d;
-        border: 1px solid #ffcccc;
-        &:hover { background: #ff4d4d; color: white; }
-      }
     }
   }
 
@@ -253,6 +218,36 @@
     }
   }
 }
+
+
+
+.card_icons {
+  display: flex;
+  gap: 6px;
+  margin-left: 8px;
+
+  .icon_btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px 6px;
+    border-radius: 6px;
+    font-size: 16px;
+  
+
+    &:hover {
+      background: #f0f0f0;
+    }
+  }
+  .edit_icon:hover {
+    background: #e3f2fd;   // 👈 blue on hover
+  }
+
+  .delete_icon:hover {
+    background: #ffebee;   // 👈 red on hover
+  }
+}
+
 
 @keyframes spin {
   to { transform: rotate(360deg); }

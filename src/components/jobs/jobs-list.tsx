@@ -1,70 +1,89 @@
-import React, { useEffect } from 'react';
-import './jobs-list.scss';
+import React, { useEffect, useRef } from 'react'
+import './jobs-list.scss'
+import { JobService } from '../../services'
+import { formatDate } from '../../handler/date-handler'
+
+
+/**
+ * 
+ * @param Jobdetails 
+ *
+ * @returns 
+ */
 
 const JobList = (props: any) => {
 
-  // Polling — check job status every 2 seconds
+
+
+//used to store jobid for multiple intervals
+  const intervalsRef = useRef<{ [jobId: number]: any }>({})
+
   useEffect(() => {
 
-    const interval = setInterval(() => {
+    props.jobs.forEach((job: any) => {
 
-      props.jobs.forEach((job: any) => {
+      if (job.status === 'COMPLETED' || job.status === 'FAILED') {
+        if (intervalsRef.current[job.id]) {
+          clearInterval(intervalsRef.current[job.id])
+          delete intervalsRef.current[job.id]
+        }
+        return
+      }
 
-        // Stop checking if already finished
-        if (job.status === 'COMPLETED' || job.status === 'FAILED') {
-          return;
+      
+      if (intervalsRef.current[job.id]) return
+
+      
+      const interval = setInterval(async () => {
+
+        try {
+
+          // Call  API to get job status
+          const updatedJob = await JobService.getJobStatus(props.projectId, job.id)
+
+          
+          props.onUpdateJob(job.id, updatedJob)
+
+          
+          if (updatedJob.status === 'COMPLETED' || updatedJob.status === 'FAILED') {
+            clearInterval(intervalsRef.current[job.id])
+            delete intervalsRef.current[job.id]
+          }
+
+        } catch (err) {
+          console.log('Polling error:', err)
         }
 
-        // Simple fake progress increase
-        let newProgress = job.progress + 20;
+      }, 2000)
 
-        if (newProgress >= 100) {
-          newProgress = 100;
-          props.onUpdateJob(job.id, 'COMPLETED', newProgress);
-        } else {
-          props.onUpdateJob(job.id, 'RUNNING', newProgress);
-        }
+      intervalsRef.current[job.id] = interval
 
-      });
+    })
 
-    }, 2000);
-
-    // Cleanup — runs when component unmounts
+    // destroy the intervals
     return () => {
-      clearInterval(interval);
-    };
+      Object.values(intervalsRef.current).forEach((id) => clearInterval(id))
+    }
 
-  }, [props.jobs]);
+  }, [props.jobs])
 
-  
-
-  /** Download job output
-   * @param JobId
+  /** 
+   * @param jobId
    */
   const handleDownload = (jobId: number) => {
-
-    const fileContent = 'This is fake zip content for job ' + jobId;
-    const blob = new Blob([fileContent], { type: 'text/plain' });
-    const url = window.URL.createObjectURL(blob);
-
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'job-' + jobId + '-output.zip';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
+    // Call  API to download zip file
+    JobService.downloadJobOutput(props.projectId, jobId)
+  }
 
   /** Get CSS class based on status
    * @param status
    */
   const getStatusClass = (status: string) => {
-    if (status === 'COMPLETED') {return 'status_text status_completed';}
-    if (status === 'RUNNING') {return 'status_text status_running';}
-    if (status === 'FAILED') {return 'status_text status_failed';}
-    return 'status_text status_pending';
-  };
+    if (status === 'COMPLETED') return 'status_text status_completed'
+    if (status === 'RUNNING') return 'status_text status_running'
+    if (status === 'FAILED') return 'status_text status_failed'
+    return 'status_text status_pending'
+  }
 
   return (
     <div>
@@ -89,7 +108,9 @@ const JobList = (props: any) => {
               <tr key={job.id}>
                 <td>{job.id}</td>
                 <td>
-                  <span className={getStatusClass(job.status)}>{job.status}</span>
+                  <span className={getStatusClass(job.status)}>
+                    {job.status}
+                  </span>
                 </td>
                 <td>
                   <div className="progress_outer">
@@ -100,12 +121,12 @@ const JobList = (props: any) => {
                   </div>
                   <span className="progress_text">{job.progress}%</span>
                 </td>
-                <td>{job.createdAt}</td>
-                <td>{job.completedAt || '-'}</td>
+                <td>{formatDate(job.createdAt)}</td>
+                <td>{formatDate(job.completedAt) || '-'}</td>
                 <td>
                   {job.status === 'COMPLETED' && (
                     <button
-                      className="download_btn"
+                      className="btn btn-primary"
                       onClick={() => handleDownload(job.id)}
                     >
                       Download
@@ -118,7 +139,7 @@ const JobList = (props: any) => {
         </table>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default JobList;
+export default JobList

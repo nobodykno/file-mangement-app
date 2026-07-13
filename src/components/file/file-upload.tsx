@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
-import './file-upload.scss';
+import React, { useState } from "react";
+import "./file-upload.scss";
 
+
+/**
+ * 
+ * @param uploadedfiledetails 
+ * @returns 
+ */
 const FileUpload = (props: any) => {
-
   const [selectedFiles, setSelectedFiles] = useState<any>([]);
   const [progress, setProgress] = useState<number>(0);
   const [isUploading, setIsUploading] = useState<boolean>(false);
 
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) {return;}
+  const handleFileSelect = (e: any) => {
+    if (!e.target.files) {
+      return;
+    }
     const files = Array.from(e.target.files);
     setSelectedFiles(files);
   };
@@ -21,7 +28,7 @@ const FileUpload = (props: any) => {
    * @param void
    */
 
-  const handleDrop = (e:any) => {
+  const handleDrop = (e: any) => {
     e.preventDefault();
     const files = Array.from(e.dataTransfer.files);
     setSelectedFiles(files);
@@ -45,15 +52,7 @@ const FileUpload = (props: any) => {
         clearInterval(interval);
         setIsUploading(false);
 
-        selectedFiles.forEach((file) => {
-          const newFile = {
-            id: Date.now() + Math.random(),
-            name: file.name,
-            size: file.size,
-            uploadedDate: new Date().toLocaleDateString()
-          };
-          props.onUpload(newFile);
-        });
+        props.onUpload(selectedFiles);
 
         setSelectedFiles([]);
         setProgress(0);
@@ -65,7 +64,11 @@ const FileUpload = (props: any) => {
     <div>
       <h3>Upload Files</h3>
 
-      <div className="upload_box" onDragOver={handleDragOver} onDrop={handleDrop}>
+      <div
+        className="upload_box"
+        onDragOver={handleDragOver}
+        onDrop={handleDrop}
+      >
         <p>Drag and drop files here</p>
         <p>OR</p>
         <input type="file" multiple onChange={handleFileSelect} />
@@ -80,19 +83,25 @@ const FileUpload = (props: any) => {
             ))}
           </ul>
 
-          <button className="upload_btn" onClick={handleUpload} disabled={isUploading}>
-            {isUploading ? 'Uploading...' : 'Upload Files'}
+          <button
+            className="btn btn-primary"
+            onClick={handleUpload}
+            disabled={isUploading}
+          >
+            {isUploading ? "Uploading..." : "Upload Files"}
           </button>
         </div>
       )}
 
       {isUploading && (
         <div className="progress_outer">
-          <div className="progress_inner" style={{ width: progress + '%' }}></div>
+          <div
+            className="progress_inner"
+            style={{ width: progress + "%" }}
+          ></div>
           <p>{progress}%</p>
         </div>
       )}
-
     </div>
   );
 };

@@ -33,17 +33,3 @@
     border-radius: 5px;
   }
   
-  .upload_btn {
-    padding: 8px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  .upload_btn:disabled {
-    background-color: gray;
-    cursor: not-allowed;
-  }

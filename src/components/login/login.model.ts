@@ -1,5 +1,5 @@
 
-export interface LoginModel{
+export interface ILoginModel{
     email: string;
     password: string;
 }

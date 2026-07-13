@@ -1,27 +1,27 @@
-export interface Project {
+export interface IProject {
   id: number;
   name: string;
   description: string;
-  filesCount: number;
-  jobsCount: number;
-  createdDate: string;
+  files_count: number;
+  jobs_count: number;
+  created_at: string | Date;
 }
 
-export interface CreateProjectModel {
+export interface ICreateProjectModel {
   name: string;
   description: string;
 }
 
-export interface ProjectFile {
+export interface IProjectFile {
   id: number;
   name: string;
   size: string;
   uploadedDate: string;
 }
 
-export interface ProjectJob {
+export interface IProjectJob {
   id: number;
   name: string;
-  status: 'pending' | 'running' | 'completed' | 'failed';
+  status: 'PENDING' | 'RUNNING' | 'COMPLETED' | 'FAILED';
   createdDate: string;
 }

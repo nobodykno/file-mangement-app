@@ -1,50 +1,25 @@
-import React, { useState } from 'react';
-import './login.scss';
-import { LoginModel } from './login.model';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import "./login.scss";
+import { ILoginModel } from "./login.model";
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+import { Login, SaveAuth } from "../../services/auth-service";
+
+const LoginInfo = () => {
   const navigate = useNavigate();
 
-  const [loginForm, setLoginForm] = useState<LoginModel>({
-    email: '',
-    password: '',
+  const [loginForm, setLoginForm] = useState<ILoginModel>({
+    email: "",
+    password: "",
   });
-
-  /** To accept submit login information and set token
-   * @param void
-   */
-
-  const submit = () => {
-    clearErrorMessage();
-
-    // Validate form
-    if (!validateForm()) {
-      return;
-    } else {
-      SetToken();
-    }
-
-    // Set loading state
-    setIsLoading(true);
-  };
-
-  function SetToken() {
-    localStorage.setItem('token', '12345');
-    navigate('/projects');
-  }
-
-  /** To accept the change in input field and setDate to login form
-   * @param  inputevent
-   * */
 
   const handleChange = (e) => {
     setLoginForm({ ...loginForm, [e.target.name]: e.target.value });
   };
 
-  // Loading and error states
+  
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   /** Set error message
    * @param message - error message to display
@@ -55,40 +30,48 @@ const Login = () => {
 
   /** Clear error message */
   const clearErrorMessage = () => {
-    setError('');
+    setError("");
   };
 
   /** Validate form fields
    * @returns boolean - true if valid, false otherwise
    */
-  const validateForm = (): boolean => {
-    // Clear previous error
-    clearErrorMessage();
+  const submit = async () => {
 
-    // Email validation - required and valid format
+    setIsLoading(true);
+
     if (!loginForm.email.trim()) {
-      setErrorMessage('Email is required');
+      setErrorMessage("Email is required");
       return false;
     } else if (!/\S+@\S+\.\S+/.test(loginForm.email)) {
-      setErrorMessage('Please enter a valid email address');
+      setErrorMessage("Please enter a valid email address");
       return false;
     }
 
-    // Password validation - only check if empty
+   
     if (!loginForm.password.trim()) {
-      setErrorMessage('Password is required');
+      setErrorMessage("Password is required");
       return false;
     }
 
-    if (
-      loginForm.email !== 'paramjit@gmail.com' &&
-      loginForm.password !== '1234'
-    ) {
-      setErrorMessage('Wrong Credentials');
-      return false;
-    }
+    try {
+      
+      const response = await Login({
+        email: loginForm.email,
+        password: loginForm.password,
+      });
 
-    return true;
+    
+      SaveAuth(response.token);
+
+     
+      navigate("/projects");
+    } catch (err: any) {
+      setErrorMessage(err.message || "Login failed!");
+    } finally {
+      clearErrorMessage();
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -123,7 +106,7 @@ const Login = () => {
 
         <div className="submitbutton">
           <button className="btn btn-primary btn-login" onClick={submit}>
-            {isLoading ? 'Logging in...' : 'Login'}
+            {isLoading ? "Logging in..." : "Login"}
           </button>
         </div>
         {error && <div className="error-message">{error}</div>}
@@ -132,4 +115,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginInfo;

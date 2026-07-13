@@ -8,7 +8,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 
 const authnitcate = () => {
   const token = localStorage.getItem('token');
-  if (token === '12345') {
+  if (token) {
     return true;
   }
   else {

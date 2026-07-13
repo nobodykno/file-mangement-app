@@ -2,17 +2,3 @@
     padding: 20px;
   }
   
-  .create_job_btn {
-    padding: 8px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 15px 0;
-  }
-  
-  .create_job_btn:disabled {
-    background-color: gray;
-    cursor: not-allowed;
-  }
