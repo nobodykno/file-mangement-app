@@ -2,11 +2,10 @@ import React from "react";
 import "./file-table.scss";
 import { formatDate } from "../../handler/date-handler";
 
-
 /**
- * 
+ *
  * @param fileDetails
- * @returns 
+ * @returns
  */
 const FileTable = (props: any) => {
   const formatSize = (bytes: number) => {
@@ -38,7 +37,7 @@ const FileTable = (props: any) => {
           </thead>
           <tbody>
             {props.files.map((file: any) => (
-              <tr key={file.id}>
+              <tr key={file.path}>
                 <td>
                   <input
                     type="checkbox"

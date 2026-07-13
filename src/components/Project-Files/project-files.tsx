@@ -55,7 +55,8 @@ const ProjectFiles = () => {
         Number(projectId),
         uploadedFiles
       );
-      setFiles([...files, ...uploadedFiles]);
+
+      setFiles([...files, ...newFiles]);
     } catch (err) {
       console.log(error);
     }
@@ -99,7 +100,6 @@ const ProjectFiles = () => {
 
       setJobs([...jobs, newJob]);
 
-     
       setSelectedFiles([]);
     } catch (err) {
       setError("Failed to create job!");

@@ -36,7 +36,7 @@ export const uploadFiles = async (projectId: number, files: File[]): Promise<IPr
   });
 
   const data = await httpService(url, method, formData, true); 
-  return data;
+  return data.result;
 };
 
 /**
