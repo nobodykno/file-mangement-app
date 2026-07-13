@@ -1,7 +1,7 @@
 .navbar_band { 
     height: 51px;
     width: 100%;
-    animation: rainbowtransition 10s ease-in-out infinite;
+    background-color: #f1f2f5;
 }
 
 .btn-logout{
@@ -15,26 +15,15 @@
      padding-top: 6px;
 }
 
-@keyframes rainbowtransition {
-    0% {
-        background-color: #ffb3b3; // Pastel Red
-    }
-    16% {
-        background-color: #ffd9b3; // Pastel Orange
-    }
-    33% {
-        background-color: #ffffb3; // Pastel Yellow
-    }
-    50% {
-        background-color: #b3ffb3; // Pastel Green
-    }
-    66% {
-        background-color: #b3b3ff; // Pastel Blue
-    }
-    83% {
-        background-color: #e6b3ff; // Pastel Purple
-    }
-    100% {
-        background-color: #ffb3b3; // Back to Pastel Red
-    }
+
+.header{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: stretch;
+    justify-content: center;
+}
+
+.title{
+    padding-top: 13px;
+    font-size: 21px;
 }

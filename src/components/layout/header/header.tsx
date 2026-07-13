@@ -19,11 +19,19 @@ const Header = () => {
       <div className="welcome_msg"></div>
 
       {isLoggedIn && (
-        <div className="button-container">
-          <button className="btn btn-logout btn-primary" onClick={handleLogout}>
-            Logout
-          </button>
-        </div>
+        <>
+          <div className="header">
+            <div className="title"> Central File Management</div>
+            <div className="button-container">
+              <button
+                className="btn btn-logout btn-primary"
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
+            </div>
+          </div>
+        </>
       )}
     </nav>
   );

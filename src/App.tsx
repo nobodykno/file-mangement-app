@@ -23,7 +23,7 @@ const ProtectedLayout = () => {
         <main className="app_content">
           <Routes>
             <Route element={<AuthGuard />}>
-              <Route path="/" element={<Projects />} />
+              <Route path="/" element={<Navigate to="/projects" replace />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/projects/:projectId" element={<ProjectDetail />} />
               <Route

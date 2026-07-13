@@ -75,10 +75,6 @@
       border-top: 1px solid #2a2a3e;
       font-size: 14px;
       transition: 0.2s;
-  
-      &:hover {
-        background: #e74c3c;
-        color: #fff;
-      }
+      cursor: pointer;
     }
   }
