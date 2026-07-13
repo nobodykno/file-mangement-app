@@ -187,6 +187,13 @@
       cursor: pointer;
     }
   }
+
+
+  .header-btn{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
   
   @keyframes spin {
     to { transform: rotate(360deg); }

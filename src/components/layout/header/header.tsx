@@ -1,37 +1,32 @@
-import React from 'react';
-import './header.scss';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import "./header.scss";
+import { useNavigate } from "react-router-dom";
 
 /* Common header */
- 
+
 const Header = () => {
+  const naviagte = useNavigate();
 
-  const naviagte  = useNavigate();
-
-  const isLoggedIn = !!localStorage.getItem('token');
-
+  const isLoggedIn = !!localStorage.getItem("token");
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    naviagte('/login');
+    localStorage.removeItem("token");
+    naviagte("/login");
   };
-    
-  return  (
-    <nav className='navbar_band'>
-      <div className='welcome_msg'>        
-      </div>
 
-      {isLoggedIn && 
-            <div className='button-container'>
-              <button className='btn btn-logout' onClick={handleLogout}>
-          Logout
-              </button>
-            </div>
+  return (
+    <nav className="navbar_band">
+      <div className="welcome_msg"></div>
 
-      }
+      {isLoggedIn && (
+        <div className="button-container">
+          <button className="btn btn-logout btn-primary" onClick={handleLogout}>
+            Logout
+          </button>
+        </div>
+      )}
     </nav>
   );
- 
 };
 
 export default Header;
