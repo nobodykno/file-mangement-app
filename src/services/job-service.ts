@@ -37,7 +37,7 @@ export const getJobStatus = async (projectId: number, jobId: number): Promise<IP
 export const createJob = async (projectId: number, fileIds: number[]): Promise<IProjectJob> => {
   const { url, method } = API.JOBS.CREATE(projectId);
   const data = await httpService(url, method, { fileIds });
-  return data.result || {};
+  return data.result;
 };
 
 

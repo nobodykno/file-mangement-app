@@ -37,7 +37,7 @@ const FileTable = (props: any) => {
           </thead>
           <tbody>
             {props.files.map((file: any) => (
-              <tr key={file.path}>
+              <tr key={file.id}>
                 <td>
                   <input
                     type="checkbox"

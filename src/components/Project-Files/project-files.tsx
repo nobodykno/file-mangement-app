@@ -99,7 +99,6 @@ const ProjectFiles = () => {
       );
 
       setJobs([...jobs, newJob]);
-
       setSelectedFiles([]);
     } catch (err) {
       setError("Failed to create job!");
@@ -151,8 +150,9 @@ const ProjectFiles = () => {
       />
 
       {/* Create Job Button */}
+      <div className="create-job-btn">
       <button
-        className="create_job_btn"
+        className="btn btn-primary"
         onClick={handleCreateJob}
         disabled={selectedFiles.length === 0 || isCreatingJob}
       >
@@ -160,6 +160,8 @@ const ProjectFiles = () => {
           ? "Creating..."
           : `Create ZIP Job (${selectedFiles.length} selected)`}
       </button>
+      </div>
+
 
       {/* Job List Section */}
       <JobList
