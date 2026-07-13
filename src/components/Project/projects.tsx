@@ -252,7 +252,7 @@ const Projects = () => {
           className="btn btn-primary"
           onClick={() => setIsCreateOpen(true)}
         >
-          + Create IProject
+          + Create Project
         </button>
       </div>
 
