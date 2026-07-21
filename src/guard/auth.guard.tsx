@@ -1,36 +1,38 @@
-import React from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import { useAuth } from "../hooks/useAuth";
 
-/**
- * 
- * @returns true if token is present
- */
+interface JwtPayload {
+  exp: number;
+}
 
-const authnitcate = () => {
-  const token = localStorage.getItem('token');
-  if (token) {
-    return true;
-  }
-  else {
-    return false;
-  }
-};
+const AuthGuard = () => {
+  const { token, logout } = useAuth();
 
-/**
- * 
- * @returns the child route if true else login
- */
-
-const AuthGueard = () => {
-
-
-  if (authnitcate()) {
-    return <Outlet />;
-  }
-  else {
+  if (!token) {
     return <Navigate to="/login" replace />;
   }
 
+  try {
+    const decoded = jwtDecode<JwtPayload>(token);
+
+    // Current time in seconds
+    const currentTime = Math.floor(Date.now() / 1000);
+
+    // Token expired
+    if (decoded.exp <= currentTime) {
+      logout();
+
+      return <Navigate to="/login" replace />;
+    }
+  } catch (error) {
+    // Invalid JWT
+    logout();
+
+    return <Navigate to="/login" replace />;
+  }
+
+  return <Outlet />;
 };
 
-export default AuthGueard;
+export default AuthGuard;
